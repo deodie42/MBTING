@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="replyMapper">
+
+<!--  자유 게시판 댓글 조회 -->
+	<select id="freereadReply" resultType="kr.co.vo.ReplyVO">
+		SELECT
+			FREERNO, FREECONTENT, FREEWRITER, FREEREGDATE
+				FROM MP_FREEREPLY
+				WHERE FNO = #{fno}
+	</select>
+
+	<insert id="freewriteReply">
+	INSERT INTO MP_FREEREPLY(
+								FNO
+							   ,FREERNO
+							   ,FREECONTENT
+							   ,FREEWRITER)
+					VALUES(  	#{fno}
+							   , MP_FREEREPLY_SEQ.NEXTVAL
+							   , #{freecontent}
+							   , #{freewriter}  )
+	
+	</insert>
+
+</mapper>   

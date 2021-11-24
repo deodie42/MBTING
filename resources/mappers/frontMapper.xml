@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="frontMapper">
+
+  	<!--  낚시용품 리스트 보기 -->
+
+	<select id="flist" resultType="kr.co.vo.AdminVO">
+		SELECT   PNO
+			   , PITLE
+			   , PONTENT
+			   , PRITER
+			   , PINK
+			   , PMAGE
+			   , PEGDATE
+		  FROM MP_POARD
+		  ORDER BY PNO DESC
+	</select>
+	
+	  	<!--  낚시터 리스트 보기 -->
+
+	<select id="spotlist" resultType="kr.co.vo.AdminVO">
+		SELECT  SNO
+			,	SITLE
+			,	SONTENT
+			,	SRITER
+			,	SINK
+			,	SMAGE
+			,	SEGDATE
+		  FROM MP_SOARD
+		  ORDER BY SNO DESC
+	</select>
+	
+	</mapper>

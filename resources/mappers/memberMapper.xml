@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	<!--  회원 가입  -->
+	<insert id="register">
+		INSERT INTO MP_MEMBER(UNO, USERID, USERPWD, USERNAME, USERFNAME, MEMBERMAIL)
+			values(MP_MEMBER_SEQ.NEXTVAL, #{USERID}, #{USERPWD}, #{USERNAME}, #{USERFNAME}, #{MEMBERMAIL})
+    </insert>
+   
+	<!--  로그인기능 -->
+	<select id="login" resultType="kr.co.vo.MemberVO">
+		SELECT USERID, USERPWD, USERFNAME,MCATE
+			FROM MP_MEMBER
+			WHERE USERID = #{USERID}
+			 AND USERPWD = #{USERPWD}
+	
+	</select>
+	
+	<!--  회원정보 수정 -->
+	<update id="memberUpdate">
+	UPDATE MP_MEMBER SET
+	USERPWD = #{USERPWD},
+	USERFNAME = #{USERFNAME}
+	WHERE USERID = #{USERID}
+	</update>
+	
+	
+ 	<!--  아이디 찾기 -->
+ 	<!-- 아이디 찾기 -->
+	<select id="memberid" parameterType="String" resultType="String">
+		select id from member where MEMBERMAIL = #{membermail}
+	</select>
+</mapper>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminMapper">
+
+
+  <!--  낚시 용품 게시글 작성 -->
+   <insert id="pinsert">
+   INSERT INTO MP_POARD(PNO
+   						, PITLE
+   						, PONTENT
+   						, PRITER
+   						, PINK
+   						, PMAGE)
+     			VALUES (MP_POARD_SEQ.NEXTVAL,#{pitle},#{pontent},#{priter},#{pink},#{pmage})
+   </insert>
+   
+   
+  
+   	<!--  낚시용품 리스트 보기 -->
+   	
+   	<select id="plist" resultType="kr.co.vo.AdminVO">
+		SELECT   PNO
+			   , PITLE
+			   , PRITER
+			   , PINK
+			   , PMAGE
+			   , PEGDATE
+		  FROM MP_POARD
+		  ORDER BY PNO DESC
+	</select>
+	
+	
+	<!--  낚시 용품 리스트 눌렀을때 상세보기 -->
+	<select id="pead" parameterType="int" resultType="kr.co.vo.AdminVO">
+		SELECT	PNO
+			  , PITLE
+			  , PONTENT
+			  , PRITER
+			  , PINK
+			  , PMAGE
+			  , PEGDATE
+		 FROM MP_POARD
+		 WHERE PNO = #{pno}
+	</select>
+	<!--  수정 -->
+	    <update id="ppdate" parameterType="kr.co.vo.AdminVO">
+		UPDATE MP_POARD
+		   SET PITLE    =   #{pitle},
+		   	   PONTENT  =   #{pontent},
+		   	   PINK = #{pink},
+		   	   PMAGE = #{pmage}
+		   	   
+		 WHERE PNO = #{pno} 
+	</update>
+	<!--  삭제 -->
+   		<delete id="pelete" parameterType="int">
+    	  DELETE 
+      	  FROM MP_POARD
+    	  WHERE PNO = #{pno}
+   </delete>	
+
+ <!--  유료 낚시터 게시글 작성 -->
+   	<insert id="sinsert">
+   		   INSERT INTO MP_SOARD(SNO
+   						, SITLE
+   						, SONTENT
+   						, SRITER
+   						, SINK
+   						, SMAGE
+   						, gdsThumbImg)
+     			VALUES (MP_SOARD_SEQ.NEXTVAL,#{sitle},#{sontent},#{sriter},#{sink},#{smage},#{gdsThumbImg})
+   	</insert>
+   	
+   	  	<!--  유료낚시터 리스트 보기 -->
+   	
+   	<select id="slist" resultType="kr.co.vo.AdminVO">
+		SELECT   SNO
+			   , SITLE
+			   , SONTENT
+			   , SRITER
+			   , SMAGE
+			   , SINK
+			   , SEGDATE
+		  FROM MP_SOARD
+		  ORDER BY SNO DESC
+	</select>
+   	
+   		<!--  유료낚시터 리스트 눌렀을때 상세보기 -->
+	<select id="sead" parameterType="int" resultType="kr.co.vo.AdminVO">
+		SELECT   SNO
+			   , SITLE
+			   , SONTENT
+			   , SRITER
+			   , SMAGE
+			   , SINK
+			   , SEGDATE
+		 FROM MP_SOARD
+		 WHERE SNO = #{sno}
+	</select>
+	<!--  유료낚시터 게시글 수정 삭제  -->
+	
+	<update id="update" parameterType="kr.co.vo.AdminVO">
+		UPDATE MP_SOARD
+		   SET SITLE    =   #{sitle},
+		   	   SONTENT  =   #{sontent}
+		 WHERE SNO = #{sno} 
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE 
+		  FROM MP_SOARD
+		 WHERE SNO = #{sno}
+	</delete>
+	
+
+
+	
+</mapper>
